@@ -1,10 +1,10 @@
 # DogMatch - Sistema Híbrido de Recomendação de Raças de Cães
 
-## 📋 Descrição
+##  Descrição
 
 O DogMatch é um sistema híbrido de Machine Learning que recomenda raças de cães ideais baseado nas preferências e características desejadas pelo usuário. O sistema utiliza **algoritmos de similaridade** e **feature engineering avançado** para analisar múltiplas características das raças e sugerir as melhores opções.
 
-## 🚀 Características
+##  Características
 
 - **Análise de 158 raças de cães** de 40 países diferentes
 - **11 características originais** + **5 features derivadas** (16 total)
@@ -13,7 +13,7 @@ O DogMatch é um sistema híbrido de Machine Learning que recomenda raças de c�
 - **Métricas de recomendação** (Top-K Accuracy)
 - **API REST** pronta para integração com frontend
 
-## 📊 Dataset
+##  Dataset
 
 O dataset contém informações sobre:
 - **Nome e origem** da raça (40 países)
@@ -21,7 +21,7 @@ O dataset contém informações sobre:
 - **Comportamento** (amigabilidade, inteligência, dificuldade de treino)
 - **Cuidados necessários** (exercício, grooming, problemas de saúde)
 
-## 🛠️ Instalação
+##  Instalação
 
 ### 1. Clonar o repositório
 ```bash
@@ -44,7 +44,7 @@ jupyter notebook DogMatch_ML_Pipeline.ipynb
 python dogmatch_predictor.py
 ```
 
-## 📁 Estrutura do Projeto
+##  Estrutura do Projeto
 
 ```
 ml/
@@ -64,7 +64,7 @@ ml/
 └── 📄 README.md                  # Este arquivo
 ```
 
-## 🔧 Como Usar
+##  Como Usar
 
 ### 1. Treinamento do Modelo
 
@@ -124,7 +124,7 @@ def recommend_breeds():
     return jsonify(results)
 ```
 
-## 🎯 Características Analisadas
+##  Características Analisadas
 
 | Característica | Tipo | Descrição |
 |----------------|------|-----------|
@@ -140,7 +140,7 @@ def recommend_breeds():
 | Life Span | Numérica | Expectativa de vida em anos |
 | Average Weight | Numérica | Peso médio em kg |
 
-## 🧠 Features Derivadas (Feature Engineering)
+## Features Derivadas (Feature Engineering)
 
 | Feature | Descrição | Fórmula |
 |---------|-----------|---------|
@@ -150,7 +150,7 @@ def recommend_breeds():
 | Intelligence_Training_Ratio | Razão inteligência/treino | intelligence / (training + 1) |
 | Size_Score | Score de porte | Small=1, Medium=2, Large=3, Giant=4 |
 
-## 🤖 Sistema Híbrido Implementado
+##  Sistema Híbrido Implementado
 
 ### **Modelo Principal:**
 - **KNN_Advanced** com métricas otimizadas
@@ -168,7 +168,7 @@ def recommend_breeds():
 - **LabelEncoder** para variáveis categóricas
 - **Feature Engineering** com 5 features derivadas
 
-## 📊 Métricas de Avaliação
+##  Métricas de Avaliação
 
 ### **Métricas de Recomendação:**
 - **Top-5 Accuracy:** 10% (excelente para 158 classes)
@@ -179,7 +179,7 @@ def recommend_breeds():
 - **F1-Score:** 0.0 (esperado para 158 classes únicas)
 - **Acurácia:** 0.0 (esperado para classificação exata)
 
-## 🔄 Próximos Passos
+##  Próximos Passos
 
 1. **Integração com Backend**
    - Criar API Flask/FastAPI
@@ -197,7 +197,7 @@ def recommend_breeds():
    - Informações detalhadas sobre cada raça
    - Sistema de favoritos
 
-## 🚀 Deploy
+##  Deploy
 
 ### **Vercel (Recomendado - 100% Gratuito):**
 ```bash
@@ -218,14 +218,8 @@ backend/
 └── vercel.json
 ```
 
-## 📝 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+##  Contato
 
-## 🤝 Contribuição
-
-Contribuições são bem-vindas! Por favor, abra uma issue ou pull request.
-
-## 📞 Contato
 
 Para dúvidas ou sugestões, entre em contato através das issues do repositório.

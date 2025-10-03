@@ -1,10 +1,10 @@
-# 🐕 DogMatch Backend API
+#  DogMatch Backend API
 
-## 📋 Descrição
+##  Descrição
 
 API Flask para o sistema híbrido de recomendação de raças de cães DogMatch. Fornece endpoints REST para integração com frontend e outras aplicações.
 
-## 🚀 Características
+##  Características
 
 - **API REST** completa com Flask
 - **Sistema híbrido** de ML integrado
@@ -13,7 +13,7 @@ API Flask para o sistema híbrido de recomendação de raças de cães DogMatch.
 - **Error handling** completo
 - **Deploy** no Vercel (gratuito)
 
-## 📁 Estrutura
+##  Estrutura
 
 ```
 backend/
@@ -125,7 +125,7 @@ Status da API e modelo.
 ### `GET /api/example`
 Exemplo de entrada para a API.
 
-## 🚀 Deploy
+##  Deploy
 
 ### Vercel (Recomendado - 100% Gratuito)
 ```bash
@@ -158,7 +158,7 @@ python app.py
 curl http://localhost:5000/api/health
 ```
 
-## 📊 Monitoramento
+##  Monitoramento
 
 ### Health Check
 ```bash
@@ -170,7 +170,7 @@ curl http://localhost:5000/api/health
 - **Vercel:** Dashboard do Vercel
 - **Heroku:** `heroku logs --tail`
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### Erro: "Model not found"
 - Verificar se arquivos `.pkl` estão na pasta `models/`
@@ -184,7 +184,7 @@ curl http://localhost:5000/api/health
 - Verificar se `Flask-CORS` está instalado
 - Verificar configuração CORS
 
-## 📞 Suporte
+##  Suporte
 
 - **GitHub:** [Issues](https://github.com/thiagovonsohsten/dogmatch-project/issues)
 - **API Docs:** `/api/example` para exemplos
@@ -192,4 +192,4 @@ curl http://localhost:5000/api/health
 
 ---
 
-**⭐ Se este projeto te ajudou, considere dar uma estrela!**
+
