@@ -28,14 +28,14 @@ class DogMatchPredictor:
         Inicializa o preditor carregando todos os modelos e preprocessadores.
         """
         try:
-            # Carregar modelos híbridos otimizados
+            # Carregar modelos híbridos otimizados (dataset filtrado)
             self.model = joblib.load('models/dogmatch_optimized_model.pkl')
             self.similarity_model = joblib.load('models/dogmatch_similarity_model.pkl')
             self.robust_scaler = joblib.load('models/robust_scaler.pkl')
             self.label_encoders = joblib.load('models/label_encoders.pkl')
             self.feature_info = joblib.load('models/feature_info_optimized.pkl')
             
-            # Carregar dados processados para similaridade
+            # Carregar dados processados para similaridade (dataset filtrado)
             self.X_enhanced = joblib.load('models/X_enhanced.pkl')
             self.y_processed = joblib.load('models/y_processed.pkl')
             

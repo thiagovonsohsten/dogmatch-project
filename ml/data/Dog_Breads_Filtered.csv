@@ -1,0 +1,26 @@
+Name,Origin,Type,Unique Feature,Friendly Rating (1-10),Life Span,Size,Grooming Needs,Exercise Requirements (hrs/day),Good with Children,Intelligence Rating (1-10),Shedding Level,Health Issues Risk,Average Weight (kg),Training Difficulty (1-10)
+Beagle,England,Hound,Excellent sense of smell,9,13,Small-Medium,Low,2,Yes,7,Moderate,Moderate,10,7
+Border Collie,UK,Herding,Highest intelligence,8,13,Medium,High,3,Yes,10,Moderate,Low,17,6
+Bull Terrier,England,Terrier,Egg-shaped head,7,12,Medium,Low,2,With Training,7,Low,Moderate,27,7
+Chihuahua,Mexico,Toy,Smallest dog breed,6,16,Small,Low,1,No,7,Low,Moderate,2,7
+Chow Chow,China,Non-Sporting,Blue-black tongue,5,10,Medium,High,1.5,No,5,High,High,26,9
+Cocker Spaniel,England,Sporting,Long ears,9,13,Small-Medium,High,1.5,Yes,7,High,Moderate,12,5
+Golden Retriever,Scotland,Sporting,Golden coat,10,11,Large,High,2,Yes,8,High,Moderate,29,4
+Siberian Husky,Siberia,Working,Piercing eyes,8,12,Medium,Moderate,2.5,Yes,7,Moderate,Moderate,21,7
+Labrador Retriever,Canada,Sporting,Water-resistant coat,10,11,Large,Moderate,2,Yes,8,High,Moderate,30,4
+Lhasa Apso,Tibet,Non-Sporting,Floor-length coat,6,13,Small,Very High,1,No,7,Low,Low,6,8
+Maltese,Malta,Toy,Pure white coat,8,13,Small,Very High,1,No,7,Low,Low,2.5,6
+German Shepherd,Germany,Herding,Police dog fame,8,11,Large,Moderate,2.5,With Training,9,High,Moderate,31,6
+Miniature Pinscher,Germany,Toy,Fearless nature,6,13,Small,Low,1.5,No,7,Low,Low,4,8
+Poodle (Standard),France,Non-Sporting,Curly coat,9,12,Large,Very High,2,Yes,8,Moderate,Moderate,22,5
+Pug,China,Toy,Wrinkled face,8,12,Small,Moderate,1,Yes,7,Moderate,High,7,6
+Rottweiler,Germany,Working,Powerful guarding,7,9,Large,Moderate,2,With Training,8,High,High,40,8
+Samoyed,Siberia,Working,Fluffy white coat,9,12,Medium,High,2,Yes,7,High,Moderate,21,7
+Saint Bernard,Switzerland,Working,Large size,9,8,Giant,High,2,Yes,6,High,Moderate,68,7
+Standard Schnauzer,Germany,Standard,Distinct beard,7,15,Medium,High,2,Yes,7,Moderate,Moderate,14,6
+Shih Tzu,China,Toy,Long flowing coat,8,14,Small,Very High,1,Yes,6,Moderate,Moderate,4,7
+Dachshund,Germany,Hound,Long body short legs,7,14,Small,Low,1.5,With Training,7,Moderate,High,10,7
+West Highland White Terrier,Scotland,Terrier,White coat,8,13,Small,Moderate,1.5,Yes,7,Moderate,Moderate,7,7
+Yorkshire Terrier,England,Toy,Long silky coat,8,13,Toy,High,1,Yes,7,Moderate,Moderate,2.5,6
+English Bulldog,England,Non-Sporting,Pushed-in nose,7,9,Medium,Low,1,Yes,6,Moderate,High,20,7
+French Bulldog,France,Non-Sporting,Bat ears,8,11,Small,Low,1,Yes,7,Low,High,11,6
