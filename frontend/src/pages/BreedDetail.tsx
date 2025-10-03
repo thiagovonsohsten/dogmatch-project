@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Heart, Share2, Activity, Brain, Users, Scissors } from "lucide-react";
 import { DogBreed } from "@/types/dogmatch";
-import { mockBreeds } from "@/lib/mockData";
+import { useDogMatchAPI } from "@/hooks/useDogMatchAPI";
 import Header from "@/components/Header";
 import { toast } from "sonner";
 
@@ -13,24 +13,45 @@ export default function BreedDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [breed, setBreed] = useState<DogBreed | null>(null);
+  const { getBreeds } = useDogMatchAPI();
 
   useEffect(() => {
-    const foundBreed = mockBreeds.find(b => b.id === id);
-    if (!foundBreed) {
-      navigate("/");
-      return;
-    }
-    setBreed(foundBreed);
-  }, [id, navigate]);
+    const fetchBreed = async () => {
+      if (!id) {
+        navigate("/");
+        return;
+      }
+
+      try {
+        const breeds = await getBreeds();
+        const breedName = decodeURIComponent(id);
+        const foundBreed = breeds.find(b => b.name === breedName);
+        
+        if (!foundBreed) {
+          toast.error("Raça não encontrada");
+          navigate("/");
+          return;
+        }
+        
+        setBreed(foundBreed);
+      } catch (error) {
+        console.error("Erro ao carregar raça:", error);
+        toast.error("Erro ao carregar informações da raça");
+        navigate("/");
+      }
+    };
+
+    fetchBreed();
+  }, [id, navigate, getBreeds]);
 
   if (!breed) {
     return null;
   }
 
   const characteristics = [
-    { icon: Activity, label: "Exercício", value: `${breed.exerciseNeeds}h/dia` },
+    { icon: Activity, label: "Exercício", value: `${breed.exercise_needs}h/dia` },
     { icon: Brain, label: "Inteligência", value: `${breed.intelligence}/10` },
-    { icon: Users, label: "Com crianças", value: breed.goodWithChildren ? "Sim" : "Não" },
+    { icon: Users, label: "Com crianças", value: breed.good_with_children ? "Sim" : "Não" },
     { icon: Scissors, label: "Queda de pelo", value: breed.shedding }
   ];
 
@@ -101,15 +122,15 @@ export default function BreedDetail() {
                     </div>
                     <div>
                       <span className="text-muted-foreground">Peso:</span>
-                      <span className="ml-2 font-medium">{breed.averageWeight}kg</span>
+                      <span className="ml-2 font-medium">{breed.average_weight}kg</span>
                     </div>
                     <div>
                       <span className="text-muted-foreground">Vida:</span>
-                      <span className="ml-2 font-medium">{breed.lifeExpectancy} anos</span>
+                      <span className="ml-2 font-medium">{breed.life_expectancy} anos</span>
                     </div>
                     <div>
                       <span className="text-muted-foreground">Saúde:</span>
-                      <span className="ml-2 font-medium">{breed.healthRisk}</span>
+                      <span className="ml-2 font-medium">{breed.health_risk}</span>
                     </div>
                   </div>
                 </div>
@@ -118,7 +139,7 @@ export default function BreedDetail() {
                   <h3 className="font-bold text-lg mb-3">Temperamento</h3>
                   <div className="flex flex-wrap gap-2">
                     {breed.temperament.map((trait, index) => (
-                      <Badge key={index} variant="outline" className="px-3 py-1">
+                      <Badge key={`trait-${index}`} variant="outline" className="px-3 py-1">
                         {trait}
                       </Badge>
                     ))}
@@ -150,7 +171,7 @@ export default function BreedDetail() {
               <h3 className="text-xl font-bold mb-4">Cuidados Necessários</h3>
               <ul className="space-y-3">
                 {breed.care.map((item, index) => (
-                  <li key={index} className="flex items-start gap-2">
+                  <li key={`care-${index}`} className="flex items-start gap-2">
                     <Heart className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
                     <span className="text-muted-foreground">{item}</span>
                   </li>

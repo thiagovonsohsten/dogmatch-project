@@ -4,33 +4,74 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Heart, Share2, Sparkles } from "lucide-react";
+import { ArrowLeft, Heart, Share2, Sparkles, Loader2 } from "lucide-react";
 import { UserPreferences } from "@/types/dogmatch";
 import { RecommendationResult } from "@/types/dogmatch";
-import { getRecommendation } from "@/lib/recommendation";
+import { useDogMatchAPI } from "@/hooks/useDogMatchAPI";
 import Header from "@/components/Header";
 import { toast } from "sonner";
 
 export default function Results() {
   const navigate = useNavigate();
   const [result, setResult] = useState<RecommendationResult | null>(null);
+  const { loading, error, getRecommendation } = useDogMatchAPI();
 
   useEffect(() => {
-    const storedPreferences = localStorage.getItem("dogmatch-preferences");
-    
-    if (!storedPreferences) {
-      navigate("/questionnaire");
-      return;
-    }
+    const fetchRecommendation = async () => {
+      const storedPreferences = localStorage.getItem("dogmatch-preferences");
+      
+      if (!storedPreferences) {
+        navigate("/questionnaire");
+        return;
+      }
 
-    const preferences: UserPreferences = JSON.parse(storedPreferences);
-    const recommendation = getRecommendation(preferences);
-    setResult(recommendation);
-  }, [navigate]);
+      try {
+        const preferences: UserPreferences = JSON.parse(storedPreferences);
+        const recommendation = await getRecommendation(preferences);
+        
+        if (recommendation) {
+          setResult(recommendation);
+        } else {
+          toast.error("Não foi possível obter a recomendação. Tente novamente.");
+        }
+      } catch (err) {
+        console.error("Erro ao obter recomendação:", err);
+        toast.error("Erro ao processar suas preferências.");
+      }
+    };
+
+    fetchRecommendation();
+  }, [navigate, getRecommendation]);
 
   const handleShare = () => {
     toast.success("Link copiado para a área de transferência!");
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-muted/30 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+          <p className="text-lg">Analisando suas preferências...</p>
+          <p className="text-sm text-muted-foreground">Encontrando a raça perfeita para você</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-muted/30 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-lg text-destructive mb-4">Erro ao carregar recomendação</p>
+          <p className="text-sm text-muted-foreground mb-6">{error}</p>
+          <Button onClick={() => navigate("/questionnaire")}>
+            Tentar Novamente
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   if (!result) {
     return null;
@@ -91,7 +132,7 @@ export default function Results() {
                 <div className="space-y-3 mb-8">
                   <h3 className="font-semibold text-lg">Por que esse match?</h3>
                   {result.matchReasons.map((reason, index) => (
-                    <div key={index} className="flex items-start gap-2">
+                    <div key={`reason-${index}`} className="flex items-start gap-2">
                       <Heart className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
                       <span className="text-muted-foreground">{reason}</span>
                     </div>
@@ -100,14 +141,14 @@ export default function Results() {
 
                 <div className="flex flex-wrap gap-2 mb-8">
                   {result.breed.temperament.map((trait, index) => (
-                    <Badge key={index} variant="secondary" className="px-3 py-1">
+                    <Badge key={`trait-${index}`} variant="secondary" className="px-3 py-1">
                       {trait}
                     </Badge>
                   ))}
                 </div>
 
                 <div className="flex gap-3">
-                  <Link to={`/breed/${result.breed.id}`} className="flex-1">
+                  <Link to={`/breed/${encodeURIComponent(result.breed.name)}`} className="flex-1">
                     <Button className="w-full bg-gradient-hero">
                       Ver Detalhes Completos
                     </Button>
@@ -124,8 +165,8 @@ export default function Results() {
           <div>
             <h2 className="text-2xl font-bold mb-6">Raças Similares</h2>
             <div className="grid md:grid-cols-3 gap-6">
-              {result.similarBreeds.slice(0, 3).map(({ breed, similarityScore }) => (
-                <Link key={breed.id} to={`/breed/${breed.id}`}>
+              {result.similarBreeds.slice(0, 3).map(({ breed, similarityScore }, index) => (
+                <Link key={`similar-${breed.name || index}`} to={`/breed/${encodeURIComponent(breed.name)}`}>
                   <Card className="overflow-hidden hover:shadow-medium transition-all cursor-pointer group">
                     <div className="aspect-square overflow-hidden">
                       <img
