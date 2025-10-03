@@ -147,7 +147,7 @@ class DogMatchAPI {
       temperament: this.getBreedTemperament(breedName),
       care: this.getBreedCare(breedName),
       history: `O ${breedName} tem uma história rica e interessante.`,
-      images: [`https://images.dog.ceo/breeds/${breedName.toLowerCase().replace(/\s+/g, '-')}/1.jpg`]
+      images: this.getBreedImages(breedName)
     }));
 
     console.log('🐕 Breeds carregadas:', breeds.length);
@@ -294,6 +294,69 @@ class DogMatchAPI {
     return ['Exercício regular', 'Escovação semanal', 'Treinamento básico'];
   }
 
+  private getBreedImages(breedName: string): string[] {
+    // Mapear nomes de raças para nomes corretos da API Dog CEO
+    const breedMapping: { [key: string]: string } = {
+      'Australian Shepherd': 'australian-shepherd',
+      'German Shepherd': 'german-shepherd',
+      'Golden Retriever': 'golden-retriever',
+      'Labrador Retriever': 'labrador',
+      'Border Collie': 'border-collie',
+      'Siberian Husky': 'husky',
+      'Jack Russell Terrier': 'jack-russell',
+      'Boston Terrier': 'boston-terrier',
+      'Yorkshire Terrier': 'yorkshire',
+      'Shih Tzu': 'shiba',
+      'Great Dane': 'great-dane',
+      'Saint Bernard': 'st-bernard',
+      'Newfoundland': 'newfoundland',
+      'Irish Wolfhound': 'irish-wolfhound',
+      'Leonberger': 'leonberg',
+      'Mastiff': 'mastiff',
+      'Bulldog': 'bulldog',
+      'Pug': 'pug',
+      'Chihuahua': 'chihuahua',
+      'Pomeranian': 'pomeranian',
+      'Maltese': 'maltese',
+      'Beagle': 'beagle',
+      'Basset Hound': 'basset',
+      'Afghan Hound': 'afghan',
+      'Greyhound': 'greyhound',
+      'Doberman': 'doberman',
+      'Rottweiler': 'rottweiler',
+      'Boxer': 'boxer',
+      'Dalmatian': 'dalmatian',
+      'Chow Chow': 'chow',
+      'Akita': 'akita',
+      'Shar Pei': 'sharpei',
+      'Basenji': 'basenji',
+      'Weimaraner': 'weimaraner',
+      'Pointer': 'pointer',
+      'Spaniel': 'spaniel',
+      'Collie': 'collie',
+      'Briard': 'briard',
+      'Bouvier des Flandres': 'bouvier',
+      'Black Russian Terrier': 'terrier',
+      'Greater Swiss Mountain Dog': 'mountain-dog',
+      'German Wirehaired Pointer': 'pointer',
+      'Miniature Pinscher': 'pinscher'
+    };
+
+    // Tentar encontrar o nome mapeado, senão usar o nome original
+    const apiBreedName = breedMapping[breedName] || breedName.toLowerCase().replace(/\s+/g, '-');
+    
+    // Gerar múltiplas URLs para tentar
+    const imageUrls = [
+      `https://images.dog.ceo/breeds/${apiBreedName}/1.jpg`,
+      `https://images.dog.ceo/breeds/${apiBreedName}/2.jpg`,
+      `https://images.dog.ceo/breeds/${apiBreedName}/3.jpg`,
+      `https://images.dog.ceo/breeds/${apiBreedName}/4.jpg`,
+      `https://images.dog.ceo/breeds/${apiBreedName}/5.jpg`
+    ];
+
+    return imageUrls;
+  }
+
   /**
    * Obtém informações das features
    */
@@ -414,7 +477,7 @@ class DogMatchAPI {
         temperament: recommendedBreed.temperament || ['Amigável', 'Inteligente', 'Leal'],
         care: recommendedBreed.care || ['Exercício regular', 'Escovação semanal', 'Treinamento básico'],
         history: recommendedBreed.history || `História do ${recommendedBreed.name}.`,
-        images: recommendedBreed.images || [`https://images.dog.ceo/breeds/${recommendedBreed.name.toLowerCase().replace(/\s+/g, '-')}/1.jpg`]
+        images: recommendedBreed.images || this.getBreedImages(recommendedBreed.name)
       },
       compatibilityScore: realisticScore,
       matchReasons,

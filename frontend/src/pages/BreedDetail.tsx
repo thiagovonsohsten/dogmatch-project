@@ -7,6 +7,7 @@ import { ArrowLeft, Heart, Share2, Activity, Brain, Users, Scissors } from "luci
 import { DogBreed } from "@/types/dogmatch";
 import { useDogMatchAPI } from "@/hooks/useDogMatchAPI";
 import Header from "@/components/Header";
+import BreedImage from "@/components/BreedImage";
 import { toast } from "sonner";
 
 export default function BreedDetail() {
@@ -72,10 +73,10 @@ export default function BreedDetail() {
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             <div>
-              <img
-                src={breed.images[0]}
+              <BreedImage
+                images={breed.images}
                 alt={breed.name}
-                className="w-full aspect-square object-cover rounded-2xl shadow-strong"
+                className="w-full aspect-square rounded-2xl shadow-strong"
               />
             </div>
 

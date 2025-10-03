@@ -9,6 +9,7 @@ import { UserPreferences } from "@/types/dogmatch";
 import { RecommendationResult } from "@/types/dogmatch";
 import { useDogMatchAPI } from "@/hooks/useDogMatchAPI";
 import Header from "@/components/Header";
+import BreedImage from "@/components/BreedImage";
 import { toast } from "sonner";
 
 export default function Results() {
@@ -103,10 +104,10 @@ export default function Results() {
 
             <div className="grid md:grid-cols-2 gap-8 items-start">
               <div>
-                <img
-                  src={result.breed.images[0]}
+                <BreedImage
+                  images={result.breed.images}
                   alt={result.breed.name}
-                  className="w-full aspect-square object-cover rounded-2xl shadow-medium"
+                  className="w-full aspect-square rounded-2xl shadow-medium"
                 />
               </div>
 
@@ -169,10 +170,10 @@ export default function Results() {
                 <Link key={`similar-${breed.name || index}`} to={`/breed/${encodeURIComponent(breed.name)}`}>
                   <Card className="overflow-hidden hover:shadow-medium transition-all cursor-pointer group">
                     <div className="aspect-square overflow-hidden">
-                      <img
-                        src={breed.images[0]}
+                      <BreedImage
+                        images={breed.images}
                         alt={breed.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="p-6">
