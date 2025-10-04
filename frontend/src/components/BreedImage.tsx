@@ -1,30 +1,47 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getBreedImage, getBreedImages } from '../lib/breedImages';
 
 interface BreedImageProps {
-  images: string[];
+  images?: string[];
   alt: string;
   className?: string;
   fallbackSrc?: string;
+  breedName?: string; // Nome da raça para usar imagem local
 }
 
 export default function BreedImage({ 
   images, 
   alt, 
   className = '', 
-  fallbackSrc = 'https://images.dog.ceo/breeds/mixed/1.jpg' 
+  fallbackSrc = '/dog_breeds_img/beagle.jpg',
+  breedName
 }: BreedImageProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageError, setImageError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Determinar quais imagens usar
+  const imageList = React.useMemo(() => {
+    if (breedName) {
+      // Usar imagem local da raça
+      return getBreedImages(breedName);
+    } else if (images && images.length > 0) {
+      // Usar imagens fornecidas
+      return images;
+    } else {
+      // Fallback
+      return [fallbackSrc];
+    }
+  }, [breedName, images, fallbackSrc]);
+
   useEffect(() => {
     setCurrentImageIndex(0);
     setImageError(false);
     setIsLoading(true);
-  }, [images]);
+  }, [imageList]);
 
   const handleImageError = () => {
-    if (currentImageIndex < images.length - 1) {
+    if (currentImageIndex < imageList.length - 1) {
       // Tentar próxima imagem
       setCurrentImageIndex(prev => prev + 1);
     } else {
@@ -39,7 +56,7 @@ export default function BreedImage({
     setImageError(false);
   };
 
-  const currentImage = imageError ? fallbackSrc : images[currentImageIndex];
+  const currentImage = imageError ? fallbackSrc : imageList[currentImageIndex];
 
   return (
     <div className={`relative ${className}`}>

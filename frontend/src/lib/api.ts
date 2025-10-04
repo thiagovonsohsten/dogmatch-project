@@ -295,66 +295,42 @@ class DogMatchAPI {
   }
 
   private getBreedImages(breedName: string): string[] {
-    // Mapear nomes de raças para nomes corretos da API Dog CEO
-    const breedMapping: { [key: string]: string } = {
-      'Australian Shepherd': 'australian-shepherd',
-      'German Shepherd': 'german-shepherd',
-      'Golden Retriever': 'golden-retriever',
-      'Labrador Retriever': 'labrador',
-      'Border Collie': 'border-collie',
-      'Siberian Husky': 'husky',
-      'Jack Russell Terrier': 'jack-russell',
-      'Boston Terrier': 'boston-terrier',
-      'Yorkshire Terrier': 'yorkshire',
-      'Shih Tzu': 'shiba',
-      'Great Dane': 'great-dane',
-      'Saint Bernard': 'st-bernard',
-      'Newfoundland': 'newfoundland',
-      'Irish Wolfhound': 'irish-wolfhound',
-      'Leonberger': 'leonberg',
-      'Mastiff': 'mastiff',
-      'Bulldog': 'bulldog',
-      'Pug': 'pug',
-      'Chihuahua': 'chihuahua',
-      'Pomeranian': 'pomeranian',
-      'Maltese': 'maltese',
-      'Beagle': 'beagle',
-      'Basset Hound': 'basset',
-      'Afghan Hound': 'afghan',
-      'Greyhound': 'greyhound',
-      'Doberman': 'doberman',
-      'Rottweiler': 'rottweiler',
-      'Boxer': 'boxer',
-      'Dalmatian': 'dalmatian',
-      'Chow Chow': 'chow',
-      'Akita': 'akita',
-      'Shar Pei': 'sharpei',
-      'Basenji': 'basenji',
-      'Weimaraner': 'weimaraner',
-      'Pointer': 'pointer',
-      'Spaniel': 'spaniel',
-      'Collie': 'collie',
-      'Briard': 'briard',
-      'Bouvier des Flandres': 'bouvier',
-      'Black Russian Terrier': 'terrier',
-      'Greater Swiss Mountain Dog': 'mountain-dog',
-      'German Wirehaired Pointer': 'pointer',
-      'Miniature Pinscher': 'pinscher'
+    // Usar imagens locais da pasta public/dog_breeds_img/
+    const breedImageMap: { [key: string]: string } = {
+      'Beagle': '/dog_breeds_img/beagle.jpg',
+      'Border Collie': '/dog_breeds_img/border collie.jpg',
+      'Bull Terrier': '/dog_breeds_img/bull terrier.jpg',
+      'Chihuahua': '/dog_breeds_img/chihuahua.jpg',
+      'Chow Chow': '/dog_breeds_img/chow chow.jpg',
+      'Cocker Spaniel': '/dog_breeds_img/cocker spaniel.jpg',
+      'Golden Retriever': '/dog_breeds_img/golden.jpg',
+      'Siberian Husky': '/dog_breeds_img/husky.jpg',
+      'Labrador Retriever': '/dog_breeds_img/labrador.jpg',
+      'Lhasa Apso': '/dog_breeds_img/lhasa apso.jpeg',
+      'Maltese': '/dog_breeds_img/maltese.jpg',
+      'German Shepherd': '/dog_breeds_img/german Shepherd.jpg',
+      'Miniature Pinscher': '/dog_breeds_img/pinscher.jpg',
+      'Poodle (Standard)': '/dog_breeds_img/poodle.jpg',
+      'Pug': '/dog_breeds_img/pug.jpg',
+      'Rottweiler': '/dog_breeds_img/rotweiller.jpg',
+      'Samoyed': '/dog_breeds_img/samoyed.jpg',
+      'Saint Bernard': '/dog_breeds_img/saint bernard.jpg',
+      'Standard Schnauzer': '/dog_breeds_img/schnauzer.jpg',
+      'Shih Tzu': '/dog_breeds_img/shih tzu.jpeg',
+      'Dachshund': '/dog_breeds_img/dachshund.jpg',
+      'West Highland White Terrier': '/dog_breeds_img/west highland white terrier.jpg',
+      'Yorkshire Terrier': '/dog_breeds_img/yorkshire.jpg',
+      'English Bulldog': '/dog_breeds_img/english bulldog.jpg',
+      'French Bulldog': '/dog_breeds_img/french bulldog.jpg',
     };
 
-    // Tentar encontrar o nome mapeado, senão usar o nome original
-    const apiBreedName = breedMapping[breedName] || breedName.toLowerCase().replace(/\s+/g, '-');
-    
-    // Gerar múltiplas URLs para tentar
-    const imageUrls = [
-      `https://images.dog.ceo/breeds/${apiBreedName}/1.jpg`,
-      `https://images.dog.ceo/breeds/${apiBreedName}/2.jpg`,
-      `https://images.dog.ceo/breeds/${apiBreedName}/3.jpg`,
-      `https://images.dog.ceo/breeds/${apiBreedName}/4.jpg`,
-      `https://images.dog.ceo/breeds/${apiBreedName}/5.jpg`
-    ];
+    // Retornar imagem local se disponível, senão fallback
+    if (breedImageMap[breedName]) {
+      return [breedImageMap[breedName]];
+    }
 
-    return imageUrls;
+    // Fallback para beagle se não encontrar a raça
+    return ['/dog_breeds_img/beagle.jpg'];
   }
 
   /**

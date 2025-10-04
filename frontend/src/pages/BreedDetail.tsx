@@ -77,6 +77,7 @@ export default function BreedDetail() {
                 images={breed.images}
                 alt={breed.name}
                 className="w-full aspect-square rounded-2xl shadow-strong"
+                breedName={breed.name}
               />
             </div>
 

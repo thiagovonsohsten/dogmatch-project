@@ -108,6 +108,7 @@ export default function Results() {
                   images={result.breed.images}
                   alt={result.breed.name}
                   className="w-full aspect-square rounded-2xl shadow-medium"
+                  breedName={result.breed.name}
                 />
               </div>
 
@@ -174,6 +175,7 @@ export default function Results() {
                         images={breed.images}
                         alt={breed.name}
                         className="w-full h-full group-hover:scale-105 transition-transform duration-300"
+                        breedName={breed.name}
                       />
                     </div>
                     <div className="p-6">
