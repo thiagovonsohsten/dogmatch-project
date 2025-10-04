@@ -10,6 +10,7 @@ import { RecommendationResult } from "@/types/dogmatch";
 import { useDogMatchAPI } from "@/hooks/useDogMatchAPI";
 import Header from "@/components/Header";
 import BreedImage from "@/components/BreedImage";
+import { getBreedNamePT } from "@/lib/breedNames";
 import { toast } from "sonner";
 
 export default function Results() {
@@ -114,7 +115,7 @@ export default function Results() {
 
               <div>
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                  {result.breed.name}
+                  {getBreedNamePT(result.breed.name)}
                 </h1>
                 
                 <div className="mb-6">
@@ -180,7 +181,7 @@ export default function Results() {
                     </div>
                     <div className="p-6">
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold">{breed.name}</h3>
+                        <h3 className="text-xl font-bold">{getBreedNamePT(breed.name)}</h3>
                         <Badge variant="secondary">{similarityScore}%</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground line-clamp-2">

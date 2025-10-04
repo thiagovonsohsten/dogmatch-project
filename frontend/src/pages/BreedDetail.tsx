@@ -8,6 +8,7 @@ import { DogBreed } from "@/types/dogmatch";
 import { useDogMatchAPI } from "@/hooks/useDogMatchAPI";
 import Header from "@/components/Header";
 import BreedImage from "@/components/BreedImage";
+import { getBreedNamePT } from "@/lib/breedNames";
 import { toast } from "sonner";
 
 export default function BreedDetail() {
@@ -84,7 +85,7 @@ export default function BreedDetail() {
             <div>
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h1 className="text-4xl font-bold mb-2">{breed.name}</h1>
+                  <h1 className="text-4xl font-bold mb-2">{getBreedNamePT(breed.name)}</h1>
                   <Badge variant="secondary" className="text-base px-3 py-1">
                     {breed.breedGroup}
                   </Badge>

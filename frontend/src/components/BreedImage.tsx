@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getBreedImage, getBreedImages } from '../lib/breedImages';
+import { getBreedNamePT } from '../lib/breedNames';
 
 interface BreedImageProps {
   images?: string[];
@@ -68,7 +69,7 @@ export default function BreedImage({
       
       <img
         src={currentImage}
-        alt={alt}
+        alt={breedName ? getBreedNamePT(breedName) : alt}
         className={`w-full h-full object-cover transition-opacity duration-300 ${
           isLoading ? 'opacity-0' : 'opacity-100'
         } ${className}`}
