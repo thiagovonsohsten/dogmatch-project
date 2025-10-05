@@ -8,6 +8,10 @@ export interface BreedInfo {
 }
 
 export const breedInfoMap: Record<string, BreedInfo> = {
+  'Border Collie': {
+    summary: 'O Border Collie é um cão de trabalho inteligente, de porte médio, originalmente criado para pastorear ovelhas.',
+    history: 'O Border Collie teve origem na fronteira entre a Escócia e a Inglaterra, onde era usado para pastorear ovelhas. A raça foi desenvolvida ao longo dos séculos, mantendo sua aptidão para trabalho e sua inteligência. Tornou-se popular como cão de pastoreio e também como cão de companhia.'
+  },
   'Cocker Spaniel': {
     summary: 'O Cocker Spaniel é um cão alegre, de porte médio, originalmente criado para caçar aves (como coturnos).',
     history: 'O Cocker Spaniel teve origem na Inglaterra como um tipo de Spaniel especializado na caça de aves menores, especialmente coturnos ("woodcock"). No século XIX e início do XX foi refinado em linhagens distintas (Cocker Inglês, Cocker Americano), com seleções dirigidas ao temperamento e aparência ideal para exposições, mantendo sua aptidão para caça leve.'
