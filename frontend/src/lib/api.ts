@@ -167,12 +167,36 @@ class DogMatchAPI {
   }
 
   private getBreedExercise(breedName: string): number {
-    const highEnergy = ['Border Collie', 'Australian Shepherd', 'Jack Russell', 'Siberian Husky', 'Weimaraner'];
-    const lowEnergy = ['Bulldog', 'Basset Hound', 'Pug', 'Shih Tzu', 'Maltese'];
+    // Dados reais do dataset filtrado
+    const breedExercise: { [key: string]: number } = {
+      'Beagle': 2,
+      'Border Collie': 3,
+      'Bull Terrier': 2,
+      'Chihuahua': 1,
+      'Chow Chow': 1.5,
+      'Cocker Spaniel': 1.5,
+      'Golden Retriever': 2,
+      'Siberian Husky': 2.5,
+      'Labrador Retriever': 2,
+      'Lhasa Apso': 1,
+      'Maltese': 1,
+      'German Shepherd': 2.5,
+      'Miniature Pinscher': 1.5,
+      'Poodle (Standard)': 2,
+      'Pug': 1,
+      'Rottweiler': 2,
+      'Samoyed': 2,
+      'Saint Bernard': 2,
+      'Standard Schnauzer': 2,
+      'Shih Tzu': 1,
+      'Dachshund': 1.5,
+      'West Highland White Terrier': 1.5,
+      'Yorkshire Terrier': 1,
+      'English Bulldog': 1,
+      'French Bulldog': 1
+    };
     
-    if (highEnergy.some(breed => breedName.includes(breed))) return 3.5;
-    if (lowEnergy.some(breed => breedName.includes(breed))) return 1.0;
-    return 2.0;
+    return breedExercise[breedName] || 2;
   }
 
   private getBreedChildFriendly(breedName: string): boolean {
@@ -247,21 +271,69 @@ class DogMatchAPI {
   }
 
   private getBreedLifeExpectancy(breedName: string): number {
-    const longLived = ['Chihuahua', 'Yorkshire', 'Maltese', 'Shih Tzu'];
-    const shortLived = ['Great Dane', 'Mastiff', 'Saint Bernard', 'Irish Wolfhound'];
+    // Dados reais do dataset filtrado
+    const breedLifeExpectancy: { [key: string]: number } = {
+      'Beagle': 13,
+      'Border Collie': 13,
+      'Bull Terrier': 12,
+      'Chihuahua': 16,
+      'Chow Chow': 10,
+      'Cocker Spaniel': 13,
+      'Golden Retriever': 11,
+      'Siberian Husky': 12,
+      'Labrador Retriever': 11,
+      'Lhasa Apso': 13,
+      'Maltese': 13,
+      'German Shepherd': 11,
+      'Miniature Pinscher': 13,
+      'Poodle (Standard)': 12,
+      'Pug': 12,
+      'Rottweiler': 9,
+      'Samoyed': 12,
+      'Saint Bernard': 8,
+      'Standard Schnauzer': 15,
+      'Shih Tzu': 14,
+      'Dachshund': 14,
+      'West Highland White Terrier': 13,
+      'Yorkshire Terrier': 13,
+      'English Bulldog': 9,
+      'French Bulldog': 11
+    };
     
-    if (longLived.some(breed => breedName.includes(breed))) return 15;
-    if (shortLived.some(breed => breedName.includes(breed))) return 8;
-    return 12;
+    return breedLifeExpectancy[breedName] || 12;
   }
 
   private getBreedWeight(breedName: string): number {
-    const smallBreeds = ['Chihuahua', 'Pomeranian', 'Yorkshire', 'Maltese'];
-    const largeBreeds = ['Great Dane', 'Mastiff', 'Saint Bernard', 'Newfoundland'];
+    // Dados reais do dataset filtrado
+    const breedWeights: { [key: string]: number } = {
+      'Beagle': 10,
+      'Border Collie': 17,
+      'Bull Terrier': 27,
+      'Chihuahua': 2,
+      'Chow Chow': 26,
+      'Cocker Spaniel': 12,
+      'Golden Retriever': 29,
+      'Siberian Husky': 21,
+      'Labrador Retriever': 30,
+      'Lhasa Apso': 6,
+      'Maltese': 2.5,
+      'German Shepherd': 31,
+      'Miniature Pinscher': 4,
+      'Poodle (Standard)': 22,
+      'Pug': 7,
+      'Rottweiler': 40,
+      'Samoyed': 21,
+      'Saint Bernard': 68,
+      'Standard Schnauzer': 14,
+      'Shih Tzu': 4,
+      'Dachshund': 10,
+      'West Highland White Terrier': 7,
+      'Yorkshire Terrier': 2.5,
+      'English Bulldog': 20,
+      'French Bulldog': 11
+    };
     
-    if (smallBreeds.some(breed => breedName.includes(breed))) return 5;
-    if (largeBreeds.some(breed => breedName.includes(breed))) return 70;
-    return 25;
+    return breedWeights[breedName] || 25;
   }
 
   private getBreedTemperament(breedName: string): string[] {
