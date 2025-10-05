@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { UserPreferences, DogSize, SheddingLevel, HealthRisk, BreedGroup } from "@/types/dogmatch";
 import Header from "@/components/Header";
+import BreedGroupTooltip from "@/components/BreedGroupTooltip";
 
 export default function Questionnaire() {
   const navigate = useNavigate();
@@ -86,10 +87,10 @@ export default function Questionnaire() {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Small">Pequeno (5-15kg)</SelectItem>
-                      <SelectItem value="Medium">Médio (15-30kg)</SelectItem>
-                      <SelectItem value="Large">Grande (30-50kg)</SelectItem>
-                      <SelectItem value="Giant">Gigante (50kg+)</SelectItem>
+                      <SelectItem value="Small">Pequeno</SelectItem>
+                      <SelectItem value="Medium">Médio</SelectItem>
+                      <SelectItem value="Large">Grande</SelectItem>
+                      <SelectItem value="Giant">Gigante</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -261,7 +262,10 @@ export default function Questionnaire() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="breedGroup" className="text-base">Grupo de raça preferido</Label>
+                  <div className="flex items-center gap-2">
+                    <Label htmlFor="breedGroup" className="text-base">Grupo de raça preferido</Label>
+                    <BreedGroupTooltip breedGroup={preferences.breedGroup} />
+                  </div>
                   <Select value={preferences.breedGroup} onValueChange={(v) => updatePreference("breedGroup", v as BreedGroup)}>
                     <SelectTrigger id="breedGroup">
                       <SelectValue />

@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Heart, Share2, Activity, Brain, Users, Scissors } from "lucide-react";
-import { DogBreed } from "@/types/dogmatch";
+import { DogBreed, DogSize, SheddingLevel, HealthRisk, BreedGroup } from "@/types/dogmatch";
 import { useDogMatchAPI } from "@/hooks/useDogMatchAPI";
 import Header from "@/components/Header";
 import BreedImage from "@/components/BreedImage";
 import { getBreedNamePT } from "@/lib/breedNames";
+import { getBreedInfo } from "@/lib/breedInfo";
+import { translateSize, translateShedding, translateHealthRisk, translateBreedGroup, translateChildrenCompatibility } from "@/lib/fieldTranslations";
 import { toast } from "sonner";
 
 export default function BreedDetail() {
@@ -35,7 +37,29 @@ export default function BreedDetail() {
           return;
         }
         
-        setBreed(foundBreed);
+        // Converter ApiBreed para DogBreed
+        const dogBreed: DogBreed = {
+          id: foundBreed.name.toLowerCase().replace(/\s+/g, '-'),
+          name: foundBreed.name,
+          size: foundBreed.size as DogSize,
+          exerciseNeeds: foundBreed.exercise_needs,
+          goodWithChildren: foundBreed.good_with_children,
+          intelligence: foundBreed.intelligence,
+          trainingDifficulty: foundBreed.training_difficulty,
+          shedding: foundBreed.shedding as SheddingLevel,
+          healthRisk: foundBreed.health_risk as HealthRisk,
+          breedGroup: foundBreed.breed_group as BreedGroup,
+          friendliness: foundBreed.friendliness,
+          lifeExpectancy: foundBreed.life_expectancy,
+          averageWeight: foundBreed.average_weight,
+          description: foundBreed.description || `O ${foundBreed.name} é uma raça com características únicas.`,
+          temperament: foundBreed.temperament || ['Amigável', 'Inteligente', 'Leal'],
+          care: foundBreed.care || ['Exercício regular', 'Escovação semanal', 'Treinamento básico'],
+          history: foundBreed.history || `História do ${foundBreed.name}.`,
+          images: foundBreed.images || []
+        };
+        
+        setBreed(dogBreed);
       } catch (error) {
         console.error("Erro ao carregar raça:", error);
         toast.error("Erro ao carregar informações da raça");
@@ -51,10 +75,10 @@ export default function BreedDetail() {
   }
 
   const characteristics = [
-    { icon: Activity, label: "Exercício", value: `${breed.exercise_needs}h/dia` },
+    { icon: Activity, label: "Exercício", value: `${breed.exerciseNeeds}h/dia` },
     { icon: Brain, label: "Inteligência", value: `${breed.intelligence}/10` },
-    { icon: Users, label: "Com crianças", value: breed.good_with_children ? "Sim" : "Não" },
-    { icon: Scissors, label: "Queda de pelo", value: breed.shedding }
+    { icon: Users, label: "Com crianças", value: translateChildrenCompatibility(breed.goodWithChildren) },
+    { icon: Scissors, label: "Queda de pelo", value: translateShedding(breed.shedding) }
   ];
 
   return (
@@ -87,7 +111,7 @@ export default function BreedDetail() {
                 <div>
                   <h1 className="text-4xl font-bold mb-2">{getBreedNamePT(breed.name)}</h1>
                   <Badge variant="secondary" className="text-base px-3 py-1">
-                    {breed.breedGroup}
+                    {translateBreedGroup(breed.breedGroup)}
                   </Badge>
                 </div>
                 <Button variant="outline" size="icon" onClick={() => toast.success("Compartilhado!")}>
@@ -96,7 +120,7 @@ export default function BreedDetail() {
               </div>
 
               <p className="text-lg text-muted-foreground mb-6">
-                {breed.description}
+                {getBreedInfo(breed.name).summary}
               </p>
 
               <div className="grid grid-cols-2 gap-4 mb-8">
@@ -121,19 +145,19 @@ export default function BreedDetail() {
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     <div>
                       <span className="text-muted-foreground">Tamanho:</span>
-                      <span className="ml-2 font-medium">{breed.size}</span>
+                      <span className="ml-2 font-medium">{translateSize(breed.size)}</span>
                     </div>
                     <div>
                       <span className="text-muted-foreground">Peso:</span>
-                      <span className="ml-2 font-medium">{breed.average_weight}kg</span>
+                      <span className="ml-2 font-medium">{breed.averageWeight}kg</span>
                     </div>
                     <div>
                       <span className="text-muted-foreground">Vida:</span>
-                      <span className="ml-2 font-medium">{breed.life_expectancy} anos</span>
+                      <span className="ml-2 font-medium">{breed.lifeExpectancy} anos</span>
                     </div>
                     <div>
                       <span className="text-muted-foreground">Saúde:</span>
-                      <span className="ml-2 font-medium">{breed.health_risk}</span>
+                      <span className="ml-2 font-medium">{translateHealthRisk(breed.healthRisk)}</span>
                     </div>
                   </div>
                 </div>
@@ -166,7 +190,7 @@ export default function BreedDetail() {
             <Card className="p-6">
               <h3 className="text-xl font-bold mb-4">História</h3>
               <p className="text-muted-foreground leading-relaxed">
-                {breed.history}
+                {getBreedInfo(breed.name).history}
               </p>
             </Card>
 

@@ -11,6 +11,7 @@ import { useDogMatchAPI } from "@/hooks/useDogMatchAPI";
 import Header from "@/components/Header";
 import BreedImage from "@/components/BreedImage";
 import { getBreedNamePT } from "@/lib/breedNames";
+import { translateSize, translateShedding, translateHealthRisk, translateBreedGroup, translateChildrenCompatibility } from "@/lib/fieldTranslations";
 import { toast } from "sonner";
 
 export default function Results() {
