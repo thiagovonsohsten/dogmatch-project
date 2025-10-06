@@ -46,8 +46,29 @@ export default function Results() {
     fetchRecommendation();
   }, [navigate, getRecommendation]);
 
-  const handleShare = () => {
-    toast.success("Link copiado para a área de transferência!");
+  const handleShare = async () => {
+    try {
+      // Criar link para compartilhar os resultados
+      const currentUrl = window.location.href;
+      const shareData = {
+        title: "DogMatch - Encontrei minha raça ideal!",
+        text: `Descobri que a raça ideal para mim é: ${result?.breed.name || 'Raça recomendada'}! Teste você também no DogMatch.`,
+        url: currentUrl
+      };
+
+      // Verificar se a API de compartilhamento está disponível
+      if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+        await navigator.share(shareData);
+        toast.success("Compartilhado com sucesso!");
+      } else {
+        // Fallback: copiar para área de transferência
+        await navigator.clipboard.writeText(`${shareData.text}\n\n${shareData.url}`);
+        toast.success("Link copiado para a área de transferência!");
+      }
+    } catch (error) {
+      console.error("Erro ao compartilhar:", error);
+      toast.error("Erro ao compartilhar. Tente novamente.");
+    }
   };
 
   if (loading) {
