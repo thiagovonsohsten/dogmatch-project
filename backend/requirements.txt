@@ -1,16 +1,14 @@
-# DogMatch Backend - Dependências Python
+# DogMatch Backend - Dependências Python (Otimizadas)
 # Flask API
 Flask==2.3.3
 Flask-CORS==4.0.0
 
-# Machine Learning (versões compatíveis)
-pandas>=2.0.0
-numpy>=1.24.0
-scikit-learn>=1.3.0
-joblib>=1.3.0
+# Machine Learning (versões mínimas)
+pandas==2.0.3
+numpy==1.24.3
+scikit-learn==1.3.0
+joblib==1.3.2
 
 # Utilitários
 python-dotenv==1.0.0
 
-# Deploy (Vercel)
-gunicorn==21.2.0
