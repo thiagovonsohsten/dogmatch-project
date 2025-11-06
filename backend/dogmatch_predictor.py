@@ -9,6 +9,7 @@ Sistema híbrido otimizado com feature engineering e busca por similaridade.
 import joblib
 import pandas as pd
 import numpy as np
+import os
 from typing import Dict, List, Any
 
 
@@ -28,16 +29,20 @@ class DogMatchPredictor:
         Inicializa o preditor carregando todos os modelos e preprocessadores.
         """
         try:
+            # Obter caminho absoluto do diretório atual
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            models_dir = os.path.join(current_dir, 'models')
+            
             # Carregar modelos híbridos otimizados (dataset filtrado)
-            self.model = joblib.load('models/dogmatch_optimized_model.pkl')
-            self.similarity_model = joblib.load('models/dogmatch_similarity_model.pkl')
-            self.robust_scaler = joblib.load('models/robust_scaler.pkl')
-            self.label_encoders = joblib.load('models/label_encoders.pkl')
-            self.feature_info = joblib.load('models/feature_info_optimized.pkl')
+            self.model = joblib.load(os.path.join(models_dir, 'dogmatch_optimized_model.pkl'))
+            self.similarity_model = joblib.load(os.path.join(models_dir, 'dogmatch_similarity_model.pkl'))
+            self.robust_scaler = joblib.load(os.path.join(models_dir, 'robust_scaler.pkl'))
+            self.label_encoders = joblib.load(os.path.join(models_dir, 'label_encoders.pkl'))
+            self.feature_info = joblib.load(os.path.join(models_dir, 'feature_info_optimized.pkl'))
             
             # Carregar dados processados para similaridade (dataset filtrado)
-            self.X_enhanced = joblib.load('models/X_enhanced.pkl')
-            self.y_processed = joblib.load('models/y_processed.pkl')
+            self.X_enhanced = joblib.load(os.path.join(models_dir, 'X_enhanced.pkl'))
+            self.y_processed = joblib.load(os.path.join(models_dir, 'y_processed.pkl'))
             
             # Extrair informações das features
             self.feature_columns = self.feature_info['feature_columns']
