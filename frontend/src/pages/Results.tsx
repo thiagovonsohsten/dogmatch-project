@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Heart, Share2, Sparkles, Loader2 } from "lucide-react";
+import { ArrowLeft, Heart, Share2, Sparkles, Loader2, Brain } from "lucide-react";
 import { UserPreferences } from "@/types/dogmatch";
 import { RecommendationResult } from "@/types/dogmatch";
 import { useDogMatchAPI } from "@/hooks/useDogMatchAPI";
@@ -187,7 +187,7 @@ export default function Results() {
           </Card>
 
           {/* Similar Breeds */}
-          <div>
+          <div className="mb-8">
             <h2 className="text-2xl font-bold mb-6">Raças Similares</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {result.similarBreeds.slice(0, 3).map(({ breed, similarityScore }, index) => (
@@ -215,6 +215,28 @@ export default function Results() {
               ))}
             </div>
           </div>
+
+          {/* ML Explanation Card */}
+          <Card className="p-6 bg-gradient-to-br from-primary/10 to-secondary/10">
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <Brain className="w-6 h-6 text-primary" />
+                  <h2 className="text-2xl font-bold">Como Funciona o Machine Learning?</h2>
+                </div>
+                <p className="text-muted-foreground">
+                  Entenda detalhadamente como suas preferências são processadas e transformadas 
+                  na recomendação perfeita. Descubra o processo completo de Machine Learning por trás do DogMatch.
+                </p>
+              </div>
+              <Link to="/ml-explanation">
+                <Button className="ml-6 bg-gradient-hero">
+                  <Brain className="mr-2 h-4 w-4" />
+                  Ver Explicação
+                </Button>
+              </Link>
+            </div>
+          </Card>
         </div>
       </div>
     </div>

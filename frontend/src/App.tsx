@@ -8,6 +8,7 @@ import Questionnaire from "./pages/Questionnaire";
 import Results from "./pages/Results";
 import BreedDetail from "./pages/BreedDetail";
 import About from "./pages/About";
+import MLExplanation from "./pages/MLExplanation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/questionnaire" element={<Questionnaire />} />
           <Route path="/results" element={<Results />} />
+          <Route path="/ml-explanation" element={<MLExplanation />} />
           <Route path="/breed/:id" element={<BreedDetail />} />
           <Route path="/about" element={<About />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
